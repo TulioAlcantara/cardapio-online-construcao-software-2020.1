@@ -1,0 +1,14 @@
+<h3>Checkout itens</h3>
+<div *ngFor="let cartItem of cartList">
+    <span>{{cartItem.name}}</span>
+    <span>{{cartItem.id}}</span>
+    <span>{{cartItem.quantity}}</span>
+    <span>{{cartItem.value}}</span>
+</div>
+
+<table mat-table [dataSource]="cartList">
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let item">{{item.name}}</td>
+    </ng-container>
+</table>

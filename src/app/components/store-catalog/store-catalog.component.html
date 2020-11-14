@@ -1,0 +1,41 @@
+<div class="store-info">
+  <h1>Nome do restaurante</h1>
+  <p>Descrição do restaurante</p>
+</div>
+
+<div class="catalog-item-list">
+  <mat-card *ngFor="let catalogItem of catalogList">
+    <mat-card-content class="catalog-item">
+      <!-- <span class="hidden">{{catalogItem.id}}</span> -->
+      <img class="catalog-item-picture" src="{{ catalogItem.pictureUrl }}" />
+
+      <div class="catalog-item-info">
+        <h2 class="catalog-item-title">{{ catalogItem.name }}</h2>
+        <h2 class="catalog-item-value">${{ catalogItem.value }}</h2>
+        <small class="catalog-item-desc">
+          Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+        </small>
+      </div>
+
+      <div>
+        <form>
+          <mat-form-field class="w-100">
+            <mat-label>Quantity</mat-label>
+            <input
+              matInput
+              class="catalog-item-quantity-input"
+              type="number"
+              (change)="handleQuantityChanges($event, catalogItem.id)"
+            />
+          </mat-form-field>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<button class="btn-checkout" mat-raised-button (click)="openCheckoutModal()">
+  <mat-icon>shopping_cart</mat-icon> Checkout<span id="checkout-total-value">{{
+    checkoutValueOutput
+  }}</span>
+</button>
