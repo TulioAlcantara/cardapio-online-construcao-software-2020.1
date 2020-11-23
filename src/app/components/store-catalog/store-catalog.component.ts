@@ -11,24 +11,7 @@ import { CatalogService } from "src/app/services/catalog/catalog.service";
   styleUrls: ["./store-catalog.component.scss"],
 })
 export class StoreCatalogComponent implements OnInit {
-  catalogList = [
-    {
-      name: "Burger with fries",
-      description: "Ipsum LoremIpsum LoremIpsum LoremIpsum LoremIpsum Lorem",
-      pictureUrl:
-        "https://img.itdg.com.br/tdg/images/blog/uploads/2020/05/shutterstock_1710468256.jpg",
-      id: 0,
-      value: 10,
-    },
-    {
-      name: "Pasta",
-      description: "Ipsum LoremIpsum LoremIpsum LoremIpsum LoremIpsum Lorem",
-      pictureUrl:
-        "https://media.istockphoto.com/photos/spaghetti-in-a-dish-on-a-white-background-picture-id1144823591",
-      id: 1,
-      value: 15,
-    },
-  ];
+  catalogList = [];
   cartList = [];
   checkoutValue: number;
   checkoutValueOutput: string;
@@ -40,13 +23,13 @@ export class StoreCatalogComponent implements OnInit {
   ngOnInit(): void {
     this.catalogService
       .getCatalogItensOfStore("2HWV3WYwqUzasmLDGYfB")
-      .then((itens) => {console.log(itens)});
+      .then((itens) => (this.catalogList = itens));
   }
 
   openCheckoutModal(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = this.cartList;
-    const dialogRef = this.dialog.open(CheckoutModalComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CheckoutModalComponent, {
+      data: this.cartList,
+    });
     // dialogRef.afterClosed()
   }
 
@@ -79,7 +62,6 @@ export class StoreCatalogComponent implements OnInit {
     this.cartList.forEach((cartItem) => {
       checkoutValue += cartItem.quantity * cartItem.value;
     });
-    // this.cartList.reduce((checkoutValue, currentValue) => (checkoutValue+(currentValue.quantity * currentValue.value)))
     if (this.cartList.length) {
       this.checkoutValueOutput = ` ($${checkoutValue})`;
       return;
@@ -108,8 +90,7 @@ export class StoreCatalogComponent implements OnInit {
 
   removeItemFromCart(cartItem): void {
     this.cartList.splice(
-      this.cartList.findIndex((item) => item.catalogId == cartItem.catalogId),
-      1
+      this.cartList.findIndex((item) => item.catalogId == cartItem.catalogId)
     );
     return;
   }

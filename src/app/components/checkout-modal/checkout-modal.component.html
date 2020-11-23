@@ -1,14 +1,57 @@
-<h3>Checkout itens</h3>
-<div *ngFor="let cartItem of cartList">
+<div class="modal-checkout">
+  <h2 class="modal-checkout-title mat-dialog-title">Meu carrinho</h2>
+
+  <div class="checkout-item-list">
+    <mat-card *ngFor="let cartItem of cartList">
+      <mat-card-content class="checkout-item">
+        <div class="checkout-item-card">
+          <img class="checkout-item-picture" src="{{ cartItem.pictureUrl }}" />
+
+          <div class="checkout-item-info">
+            <b class="checkout-item-title">{{ cartItem.name }}</b>
+            <p class="checkout-item-value">
+              Quantidade: {{ cartItem.quantity }}
+            </p>
+          </div>
+
+          <div class="checkout-item-total">
+            <p class="checkout-item-total-text">Total</p>
+            <h2 class="checkout-item-total-value">
+              R$ {{ cartItem.value.toFixed(2) * cartItem.quantity }}
+            </h2>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content class="checkout-total"> 
+        <p class="checkout-total-text">Total</p>
+        <h2 class="checkout-total-value">R$ {{ totalValue }}</h2>
+      </mat-card-content>
+    </mat-card>
+    <button class="btn-checkout-whatsapp" mat-raised-button>Whatsapp</button>
+  </div>
+  <!-- <div *ngFor="let cartItem of cartList">
     <span>{{cartItem.name}}</span>
     <span>{{cartItem.id}}</span>
     <span>{{cartItem.quantity}}</span>
     <span>{{cartItem.value}}</span>
-</div>
+</div> -->
 
-<table mat-table [dataSource]="cartList">
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let item">{{item.name}}</td>
-    </ng-container>
-</table>
+  <!-- <table mat-table [dataSource]="cartList" class="mat-elevation-z8">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let item">{{ item.name }}</td>
+  </ng-container>
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef>Quantity</th>
+    <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
+  </ng-container>
+  <ng-container matColumnDef="value">
+    <th mat-header-cell *matHeaderCellDef>Value</th>
+    <td mat-cell *matCellDef="let item">{{ item.value }}</td>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="modalTableColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: modalTableColumns"></mat-row>
+</table> -->
+</div>

@@ -1,0 +1,49 @@
+.modal-checkout-title {
+  margin-bottom: 1rem;
+}
+
+.checkout-item-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+
+  .checkout-item-card {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+
+    .checkout-item-picture {
+    }
+
+    .checkout-item-info{
+
+    }
+
+    .checkout-item-total{
+        text-align: center;
+      .checkout-item-total-text{
+      }
+      .checkout-item-total-value{
+          color: green;
+      }
+    }
+  }
+
+ 
+
+  .checkout-total {
+    // display: grid;
+    // grid-template-columns: 1fr 2fr;
+    .checkout-total-text {
+        float: left;
+    }
+    .checkout-total-value {
+        float: right;
+        color: green;
+    }
+  }
+
+  .btn-checkout-whatsapp {
+    background-color: green;
+    color: white;
+  }
+}

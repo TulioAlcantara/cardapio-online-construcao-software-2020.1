@@ -4,7 +4,7 @@ export class CatalogItemModel {
   pictureUrl: string
   id: string
   value: number
-  quantity: number
+  
 
   static fromFirestoreSnapshot(snapshot){
     const catalogItem = new CatalogItemModel();
@@ -13,7 +13,6 @@ export class CatalogItemModel {
     catalogItem.pictureUrl = snapshot.get("pictureUrl");
     catalogItem.id = snapshot.id;
     catalogItem.value = snapshot.get("value");
-    catalogItem.quantity = snapshot.get("quantity");
 
     return catalogItem;
   }

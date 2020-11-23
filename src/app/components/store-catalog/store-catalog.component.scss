@@ -2,6 +2,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap:1rem;
+
+   
   
     .catalog-item {
       display: grid;
@@ -31,7 +33,7 @@
   
   .btn-checkout {
     margin: 2rem 0;
-    background-color: green;
+    background-color: black;
     color: white;
     width: 100%;
   }
