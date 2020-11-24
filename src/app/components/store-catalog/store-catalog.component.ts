@@ -15,6 +15,7 @@ export class StoreCatalogComponent implements OnInit {
   cartList = [];
   checkoutValue: number;
   checkoutValueOutput: string;
+  cartIsEmpty = true;
   constructor(
     public dialog: MatDialog,
     private catalogService: CatalogService
@@ -42,6 +43,7 @@ export class StoreCatalogComponent implements OnInit {
 
     this.addItemToCart(newCartItem);
     this.updateCheckoutValue();
+    this.btnCheckoutVisibility()
     console.log(this.cartList);
   }
 
@@ -86,12 +88,25 @@ export class StoreCatalogComponent implements OnInit {
     } else {
       this.cartList.push(cartItem);
     }
+
+    return;
   }
 
   removeItemFromCart(cartItem): void {
     this.cartList.splice(
       this.cartList.findIndex((item) => item.catalogId == cartItem.catalogId)
     );
+    return;
+  }
+
+  btnCheckoutVisibility(): void{
+    console.log(this.cartList)
+    if(this.cartList.length){
+      this.cartIsEmpty = false;
+      return;
+    }
+
+    this.cartIsEmpty = true;
     return;
   }
 }

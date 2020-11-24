@@ -34,7 +34,7 @@
   </mat-card>
 </div>
 
-<button class="btn-checkout" mat-raised-button (click)="openCheckoutModal()">
+<button class="btn-checkout" mat-raised-button (click)="openCheckoutModal()" *ngIf="!cartIsEmpty">
   <mat-icon>shopping_cart</mat-icon> Checkout<span id="checkout-total-value">{{
     checkoutValueOutput
   }}</span>
