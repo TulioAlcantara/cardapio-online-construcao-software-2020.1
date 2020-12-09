@@ -1,9 +1,20 @@
+//ANGULAR
 import { Component, OnInit } from "@angular/core";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+
+//COMPONENTS
 import { CheckoutModalComponent } from "../checkout-modal/checkout-modal.component";
-import { CatalogItemModel } from "../../models/catalogItem/catalogItem.model";
-import { CartItemModel } from "../../models/cartItem/cartItem.model";
+
+//MATERIAL
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+
+//SERVICES
 import { CatalogService } from "src/app/services/catalog/catalog.service";
+import { StoreService } from "src/app/services/store/store.service";
+
+//MODELS
+import { StoreModel } from 'src/app/models/store/store.model';
+import { CartItemModel } from "../../models/cartItem/cartItem.model";
+import { CatalogItemModel } from "../../models/catalogItem/catalogItem.model";
 
 @Component({
   selector: "app-store-catalog",
@@ -11,27 +22,51 @@ import { CatalogService } from "src/app/services/catalog/catalog.service";
   styleUrls: ["./store-catalog.component.scss"],
 })
 export class StoreCatalogComponent implements OnInit {
-  catalogList = [];
-  cartList = [];
+  store: StoreModel = new StoreModel();;
+  storeLoading: boolean = true;
+
   checkoutValue: number;
   checkoutValueOutput: string;
-  cartIsEmpty = true;
+  
+  cartList = Array<CartItemModel>();
+  cartIsEmpty: boolean = true;
+  
+  catalogList = Array<CatalogItemModel>();
+  catalogListLoading: boolean = true;
+
   constructor(
     public dialog: MatDialog,
-    private catalogService: CatalogService
+    private _catalogService: CatalogService,
+    private _storeService: StoreService
   ) {}
 
   ngOnInit(): void {
-    this.catalogService
-      .getCatalogItensOfStore("2HWV3WYwqUzasmLDGYfB")
-      .then((itens) => (this.catalogList = itens));
+    this.getStoreInfo();
+    this.getCatalogItensOfStore();
+  }
+
+  getStoreInfo(){
+    this._storeService.getStore('2HWV3WYwqUzasmLDGYfB').subscribe((storeSnapshot) => {
+      this.store = StoreModel.fromFirestoreSnapshot(storeSnapshot);
+      this.storeLoading = false;
+    });
+  }
+
+  getCatalogItensOfStore(){
+    this._catalogService.getCatalogItensOfStore('2HWV3WYwqUzasmLDGYfB').subscribe((catalogListSnapshot) => {
+      if(!catalogListSnapshot.empty){
+        catalogListSnapshot.forEach(catalogItemSnapshot =>{
+          this.catalogList.push(CatalogItemModel.fromFirestoreSnapshot(catalogItemSnapshot));
+        });
+        this.catalogListLoading = false;
+      }
+    })
   }
 
   openCheckoutModal(): void {
     const dialogRef = this.dialog.open(CheckoutModalComponent, {
       data: this.cartList,
     });
-    // dialogRef.afterClosed()
   }
 
   handleQuantityChanges(event, id): void {
@@ -43,7 +78,7 @@ export class StoreCatalogComponent implements OnInit {
 
     this.addItemToCart(newCartItem);
     this.updateCheckoutValue();
-    this.btnCheckoutVisibility()
+    this.btnCheckoutVisibility();
     console.log(this.cartList);
   }
 
@@ -77,13 +112,9 @@ export class StoreCatalogComponent implements OnInit {
       this.removeItemFromCart(cartItem);
       return;
     }
-    let cartItemAlreadyExists = this.cartList.some(
-      (item) => item.catalogId == cartItem.catalogId
-    );
+    let cartItemAlreadyExists = this.cartList.some((item) => item.catalogId == cartItem.catalogId);
     if (cartItemAlreadyExists) {
-      let cartItemOnList = this.cartList.find(
-        (item) => item.catalogId == cartItem.catalogId
-      );
+      let cartItemOnList = this.cartList.find((item) => item.catalogId == cartItem.catalogId);
       cartItemOnList.quantity = cartItem.quantity;
     } else {
       this.cartList.push(cartItem);
@@ -93,15 +124,13 @@ export class StoreCatalogComponent implements OnInit {
   }
 
   removeItemFromCart(cartItem): void {
-    this.cartList.splice(
-      this.cartList.findIndex((item) => item.catalogId == cartItem.catalogId)
-    );
+    this.cartList.splice(this.cartList.findIndex((item) => item.catalogId == cartItem.catalogId));
     return;
   }
 
-  btnCheckoutVisibility(): void{
-    console.log(this.cartList)
-    if(this.cartList.length){
+  btnCheckoutVisibility(): void {
+    console.log(this.cartList);
+    if (this.cartList.length) {
       this.cartIsEmpty = false;
       return;
     }
