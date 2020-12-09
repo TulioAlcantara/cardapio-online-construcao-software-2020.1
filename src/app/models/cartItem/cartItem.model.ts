@@ -3,4 +3,5 @@ export class CartItemModel {
   catalogId: string;
   value: number;
   quantity: number;
+  picture: string;
 }

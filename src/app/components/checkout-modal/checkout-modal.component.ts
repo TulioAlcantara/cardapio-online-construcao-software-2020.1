@@ -8,21 +8,18 @@ import { CartItemModel } from "../../models/cartItem/cartItem.model";
   styleUrls: ["./checkout-modal.component.scss"],
 })
 export class CheckoutModalComponent implements OnInit {
-  totalValue = 0;
-  cartList = [];
-  modalTableColumns: string[] = ['name', 'quantity', 'value'];
+  cartTotalValue: number = 0;
+  cartList: Array<CartItemModel>;
+  whatsAppLink: string;
+
   constructor(@Inject(MAT_DIALOG_DATA) data) {
-    this.cartList = data;
+    this.cartList = data.cartList;
+    this.whatsAppLink = data.whatsAppLink;
+    this.cartTotalValue = data.cartTotalValue
   }
 
   ngOnInit(): void {
-    this.calculateTotalValue();
+    
   }
 
-  calculateTotalValue(){
-    
-    this.cartList.forEach(cartItem => {
-      this.totalValue += cartItem.value * cartItem.quantity;
-    });
-  }
 }

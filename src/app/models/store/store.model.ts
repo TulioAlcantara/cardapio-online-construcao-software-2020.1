@@ -6,18 +6,15 @@ export class StoreModel{
     description: string;
     adress: string;
     catalogList: Array<CatalogItemModel>;
+    phone: number; 
 
     static fromFirestoreSnapshot(snapshot){
         const store = new StoreModel();
         store.name = snapshot.get('name');
         store.description = snapshot.get('description');
         store.adress = snapshot.get('adress');
+        store.phone = snapshot.get('phone');
         store.id = snapshot.id;
-
-        // let snapshotCatalogItens = snapshot.get('catalogItens');
-        // snapshotCatalogItens.forEach(snapshotCatalogItem => {
-        //     store.catalogList.push(CatalogItemModel.fromFirestoreSnapshot(snapshotCatalogItem));
-        // });
 
         return store;
       }

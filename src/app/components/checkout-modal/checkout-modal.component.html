@@ -1,34 +1,34 @@
 <div class="modal-checkout">
-  <h2 class="modal-checkout-title mat-dialog-title">My cart</h2>
+  <h2 class="modal-checkout-title mat-dialog-title">Meu Carrinho</h2>
 
   <div class="checkout-item-list">
     <mat-card *ngFor="let cartItem of cartList">
       <mat-card-content class="checkout-item">
         <div class="checkout-item-card">
-          <img class="checkout-item-picture" src="{{ cartItem.pictureUrl }}" />
+          <img class="checkout-item-picture" src="{{ cartItem.picture }}" />
 
           <div class="checkout-item-info">
             <b class="checkout-item-title">{{ cartItem.name }}</b>
-            <p class="checkout-item-value">
-              Quantity: {{ cartItem.quantity }}
-            </p>
+            <p class="checkout-item-value">Quantity: {{ cartItem.quantity }}</p>
           </div>
 
           <div class="checkout-item-total">
             <p class="checkout-item-total-text">Total</p>
             <h2 class="checkout-item-total-value">
-              $ {{ cartItem.value.toFixed(2) * cartItem.quantity }}
+              R$ {{ cartItem.value * cartItem.quantity }}
             </h2>
           </div>
         </div>
       </mat-card-content>
     </mat-card>
     <mat-card>
-      <mat-card-content class="checkout-total"> 
+      <mat-card-content class="checkout-total">
         <p class="checkout-total-text">Total</p>
-        <h2 class="checkout-total-value">$ {{ totalValue }}</h2>
+        <h2 class="checkout-total-value">$ {{ cartTotalValue }}</h2>
       </mat-card-content>
     </mat-card>
-    <button class="btn-checkout-whatsapp" mat-raised-button>Whatsapp</button>
+    <a href="{{whatsAppLink}}">
+      <button class="btn-checkout-whatsapp" mat-raised-button>Whatsapp</button>
+    </a>
   </div>
 </div>
