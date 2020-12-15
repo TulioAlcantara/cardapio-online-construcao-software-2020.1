@@ -24,20 +24,25 @@ import { FormControl } from "@angular/forms";
   styleUrls: ["./store-catalog.component.scss"],
 })
 export class StoreCatalogComponent implements OnInit {
+  //STORE
   store: StoreModel = new StoreModel();
   storeLoading: boolean = true;
 
+  //CHECKOUT
   checkoutValue: number;
   checkoutValueOutput: string;
 
+  //CART
   cartList = Array<CartItemModel>();
   cartIsEmpty: boolean = true;
 
+  //CATALOG LIST
   catalogList = Array<CatalogItemModel>();
   catalogListFiltered = Array<CatalogItemModel>();
   catalogListLoading: boolean = true;
   catalogListFilterControl = new FormControl();
-  catalogListCategories = []
+  catalogListCategories: Array<string> = [];
+  catalogListCategoriesFiltered: Array<string> = [];
 
   constructor(
     public dialog: MatDialog,
@@ -51,14 +56,14 @@ export class StoreCatalogComponent implements OnInit {
     this.setCatalogFilter();
   }
 
-  getStoreInfo() {
+  getStoreInfo(): void {
     this._storeService.getStore("2HWV3WYwqUzasmLDGYfB").subscribe((storeSnapshot) => {
       this.store = StoreModel.fromFirestoreSnapshot(storeSnapshot);
       this.storeLoading = false;
     });
   }
 
-  getCatalogItensOfStore() {
+  getCatalogItensOfStore(): void {
     this._catalogService
       .getCatalogItensOfStore("2HWV3WYwqUzasmLDGYfB")
       .subscribe((catalogListSnapshot) => {
@@ -68,8 +73,16 @@ export class StoreCatalogComponent implements OnInit {
           });
           this.catalogListLoading = false;
           this.catalogListFiltered = this.catalogList;
+          this.getCategoriesList();
         }
       });
+  }
+
+  getCategoriesList() {
+    this.catalogListCategoriesFiltered = this.catalogListFiltered
+      .map((catalogItem) => catalogItem.category)
+      .filter((value, index, self) => self.indexOf(value) === index);
+    console.log(this.catalogListCategoriesFiltered);
   }
 
   openCheckoutModal(): void {
@@ -178,9 +191,10 @@ export class StoreCatalogComponent implements OnInit {
   setCatalogFilter(): void {
     this.catalogListFilterControl.valueChanges.pipe(debounceTime(100)).subscribe((filterValue) => {
       //TODO: Ignorar maiusculo e minusculo no filtro
-      this.catalogListFiltered = this.catalogList.filter(listItem =>{
+      this.catalogListFiltered = this.catalogList.filter((listItem) => {
         return listItem.name.includes(filterValue);
-      })
+      });
+      this.getCategoriesList();
     });
   }
 }
