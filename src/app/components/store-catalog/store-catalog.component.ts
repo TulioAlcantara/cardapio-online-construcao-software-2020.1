@@ -1,5 +1,6 @@
 //ANGULAR
 import { Component, OnInit } from "@angular/core";
+import { debounceTime, map, startWith } from "rxjs/operators";
 
 //COMPONENTS
 import { CheckoutModalComponent } from "../checkout-modal/checkout-modal.component";
@@ -15,6 +16,7 @@ import { StoreService } from "src/app/services/store/store.service";
 import { StoreModel } from "src/app/models/store/store.model";
 import { CartItemModel } from "../../models/cartItem/cartItem.model";
 import { CatalogItemModel } from "../../models/catalogItem/catalogItem.model";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-store-catalog",
@@ -32,7 +34,10 @@ export class StoreCatalogComponent implements OnInit {
   cartIsEmpty: boolean = true;
 
   catalogList = Array<CatalogItemModel>();
+  catalogListFiltered = Array<CatalogItemModel>();
   catalogListLoading: boolean = true;
+  catalogListFilterControl = new FormControl();
+  catalogListCategories = []
 
   constructor(
     public dialog: MatDialog,
@@ -43,6 +48,7 @@ export class StoreCatalogComponent implements OnInit {
   ngOnInit(): void {
     this.getStoreInfo();
     this.getCatalogItensOfStore();
+    this.setCatalogFilter();
   }
 
   getStoreInfo() {
@@ -61,6 +67,7 @@ export class StoreCatalogComponent implements OnInit {
             this.catalogList.push(CatalogItemModel.fromFirestoreSnapshot(catalogItemSnapshot));
           });
           this.catalogListLoading = false;
+          this.catalogListFiltered = this.catalogList;
         }
       });
   }
@@ -150,7 +157,7 @@ export class StoreCatalogComponent implements OnInit {
 
   createWhatsAppLink(): string {
     let whatsAppLink: string;
-    let storeNameFormated: string = this.store.name.split(' ').join('%20');
+    let storeNameFormated: string = this.store.name.split(" ").join("%20");
     let messageText: string = `Pedido%20da%20loja%20${storeNameFormated}%0D%0A%0D%0A`;
     this.cartList.forEach((cartItem) => {
       messageText += `${cartItem.quantity}%20x%20${cartItem.name}%20=>%20R$%20${cartItem.value}%0D%0A`;
@@ -161,10 +168,19 @@ export class StoreCatalogComponent implements OnInit {
   }
 
   calculateTotalValue(): number {
-    let cartTotalValue: number;
+    let cartTotalValue: number = 0;
     this.cartList.forEach((cartItem) => {
       cartTotalValue += cartItem.value * cartItem.quantity;
     });
     return cartTotalValue;
+  }
+
+  setCatalogFilter(): void {
+    this.catalogListFilterControl.valueChanges.pipe(debounceTime(100)).subscribe((filterValue) => {
+      //TODO: Ignorar maiusculo e minusculo no filtro
+      this.catalogListFiltered = this.catalogList.filter(listItem =>{
+        return listItem.name.includes(filterValue);
+      })
+    });
   }
 }

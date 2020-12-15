@@ -6,20 +6,34 @@
     />
   </div>
   <div class="store-info">
-    <h1 class="store-title">{{store.name}}</h1>
-    <h2 class="store-description">{{store.description}}</h2>
-    <h3><mat-icon class="store-location-icon">location_on</mat-icon>{{store.adress}}</h3>
+    <h1 class="store-title">{{ store.name }}</h1>
+    <h3>Lanches</h3>
+    <p class="store-description">{{ store.description }}</p>
+    <p class="store-adress">
+      <mat-icon class="store-adress-icon">location_on</mat-icon>{{ store.adress }}
+    </p>
+    <p class="store-phone"><mat-icon class="store-phone-icon">phone</mat-icon>{{ store.phone }}</p>
   </div>
 </div>
 
+<div class="catalog-filter">
+  <form>
+    <mat-form-field>
+      <mat-label>Buscar</mat-label>
+      <input matInput type="text" [formControl]="catalogListFilterControl">
+    </mat-form-field>
+  </form>
+</div>
+
 <div class="catalog-item-list">
-  <mat-card *ngFor="let catalogItem of catalogList">
+  
+  <mat-card *ngFor="let catalogItem of catalogListFiltered">
     <mat-card-content class="catalog-item">
       <img class="catalog-item-picture" src="{{ catalogItem.picture }}" />
 
       <div class="catalog-item-info">
-        <h2 class="catalog-item-title">{{ catalogItem.name }}</h2>
-        <h2 class="catalog-item-value">${{ catalogItem.value.toFixed(2) }}</h2>
+        <h3 class="catalog-item-title">{{ catalogItem.name }}</h3>
+        <h3 class="catalog-item-value">${{ catalogItem.value.toFixed(2) }}</h3>
         <small class="catalog-item-desc">
           {{ catalogItem.description }}
         </small>

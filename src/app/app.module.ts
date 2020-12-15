@@ -20,6 +20,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 //FIREBASE
 import { AngularFireModule } from "@angular/fire";
@@ -48,6 +49,7 @@ import { environment } from "../environments/environment";
     MatDialogModule,
     MatTableModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule,
 
     //ANGULAR
     AngularFireModule.initializeApp(environment.firebaseConfig),

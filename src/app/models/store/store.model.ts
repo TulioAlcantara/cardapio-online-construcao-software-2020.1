@@ -7,6 +7,7 @@ export class StoreModel{
     adress: string;
     catalogList: Array<CatalogItemModel>;
     phone: number; 
+    //TODO: Adicionar categoria
 
     static fromFirestoreSnapshot(snapshot){
         const store = new StoreModel();

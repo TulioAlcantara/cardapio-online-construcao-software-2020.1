@@ -19,6 +19,12 @@
     width: 200px;
     height: 200px;
 
+    @media(max-width:768px){
+      margin:0 auto 1rem auto ;
+      width: 150px;
+    height: 150px;
+    }
+
     img{
       width: auto;
       height: 100%;
@@ -27,11 +33,18 @@
   }
 
   .store-title{
-    font-size: 3rem;
+    margin-bottom: 0;
+  }
+  .store-description{
+    color: grey;
   }
 
-  .store-location-icon{
+  .store-adress-icon{
     color:red;
+  }
+
+  .store-phone-icon{
+    color:green;
   }
 }
 
