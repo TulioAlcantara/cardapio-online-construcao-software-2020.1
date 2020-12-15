@@ -1,6 +1,12 @@
 {
   "hosting": {
     "public": "dist/online-catalog",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
