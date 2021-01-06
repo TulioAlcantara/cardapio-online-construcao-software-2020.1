@@ -150,6 +150,8 @@ export class StoreCatalogComponent implements OnInit {
       this.cartList.push(cartItem);
     }
 
+    this.catalogListFiltered.find(item => item.id == cartItem.id).quantity = cartItem.id 
+
     return;
   }
 
@@ -190,11 +192,14 @@ export class StoreCatalogComponent implements OnInit {
 
   setCatalogFilter(): void {
     this.catalogListFilterControl.valueChanges.pipe(debounceTime(100)).subscribe((filterValue) => {
-      //TODO: Ignorar maiusculo e minusculo no filtro
       this.catalogListFiltered = this.catalogList.filter((listItem) => {
-        return listItem.name.includes(filterValue);
+        return listItem.name.toLowerCase().includes(filterValue.toLowerCase());
       });
       this.getCategoriesList();
     });
+  }
+
+  getCatalogListFilteredByCategory(category: string): CatalogItemModel[] {
+    return this.catalogListFiltered.filter(item => item.category == category);
   }
 }

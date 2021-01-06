@@ -5,6 +5,7 @@ export class CatalogItemModel {
   id: string
   value: number
   category: string
+  quantity: number = 0
   
   static fromFirestoreSnapshot(snapshot){
     const catalogItem = new CatalogItemModel();
