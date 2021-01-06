@@ -51,6 +51,7 @@
                   type="number"
                   (change)="handleQuantityChanges($event, catalogItem.id)"
                   value="{{catalogItem.quantity}}"
+                  min="0"
                 />
               </mat-form-field>
             </form>

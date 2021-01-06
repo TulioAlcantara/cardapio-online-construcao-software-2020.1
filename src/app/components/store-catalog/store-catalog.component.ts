@@ -1,3 +1,5 @@
+//TEST STORE ID = 2HWV3WYwqUzasmLDGYfB
+
 //ANGULAR
 import { Component, OnInit } from "@angular/core";
 import { debounceTime, map, startWith } from "rxjs/operators";
@@ -17,6 +19,7 @@ import { StoreModel } from "src/app/models/store/store.model";
 import { CartItemModel } from "../../models/cartItem/cartItem.model";
 import { CatalogItemModel } from "../../models/catalogItem/catalogItem.model";
 import { FormControl } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-store-catalog",
@@ -27,6 +30,7 @@ export class StoreCatalogComponent implements OnInit {
   //STORE
   store: StoreModel = new StoreModel();
   storeLoading: boolean = true;
+  selectedStoreId: string;
 
   //CHECKOUT
   checkoutValue: number;
@@ -47,17 +51,21 @@ export class StoreCatalogComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private _catalogService: CatalogService,
-    private _storeService: StoreService
+    private _storeService: StoreService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.getStoreInfo();
-    this.getCatalogItensOfStore();
-    this.setCatalogFilter();
+    this.route.paramMap.subscribe((param) => {
+      this.selectedStoreId = param.get("id");
+      this.getStoreInfo();
+      this.getCatalogItensOfStore();
+      this.setCatalogFilter();
+    });
   }
 
   getStoreInfo(): void {
-    this._storeService.getStore("2HWV3WYwqUzasmLDGYfB").subscribe((storeSnapshot) => {
+    this._storeService.getStore(this.selectedStoreId).subscribe((storeSnapshot) => {
       this.store = StoreModel.fromFirestoreSnapshot(storeSnapshot);
       this.storeLoading = false;
     });
@@ -65,7 +73,7 @@ export class StoreCatalogComponent implements OnInit {
 
   getCatalogItensOfStore(): void {
     this._catalogService
-      .getCatalogItensOfStore("2HWV3WYwqUzasmLDGYfB")
+      .getCatalogItensOfStore(this.selectedStoreId)
       .subscribe((catalogListSnapshot) => {
         if (!catalogListSnapshot.empty) {
           catalogListSnapshot.forEach((catalogItemSnapshot) => {
@@ -82,7 +90,6 @@ export class StoreCatalogComponent implements OnInit {
     this.catalogListCategoriesFiltered = this.catalogListFiltered
       .map((catalogItem) => catalogItem.category)
       .filter((value, index, self) => self.indexOf(value) === index);
-    console.log(this.catalogListCategoriesFiltered);
   }
 
   openCheckoutModal(): void {
@@ -95,8 +102,11 @@ export class StoreCatalogComponent implements OnInit {
     });
   }
 
-  handleQuantityChanges(event, id): void {
+  handleQuantityChanges(event, id: string): void {
     let newItemQuantity: number = parseInt(event.target.value);
+    if (newItemQuantity < 0) {
+      newItemQuantity = 0;
+    }
     let selectedItemCatalogId: string = id;
     let newCartItem: CartItemModel = this.newCartItemByCatalogId(selectedItemCatalogId);
 
@@ -107,7 +117,7 @@ export class StoreCatalogComponent implements OnInit {
     this.btnCheckoutVisibility();
   }
 
-  newCartItemByCatalogId(catalogId): CartItemModel {
+  newCartItemByCatalogId(catalogId: string): CartItemModel {
     let catalogItem: CatalogItemModel = this.catalogList.find((item) => item.id == catalogId);
     let newCartItem: CartItemModel;
     newCartItem = {
@@ -133,7 +143,7 @@ export class StoreCatalogComponent implements OnInit {
     return;
   }
 
-  addItemToCart(cartItem): void {
+  addItemToCart(cartItem: CartItemModel): void {
     if (cartItem.quantity == 0) {
       this.removeItemFromCart(cartItem);
       return;
@@ -150,12 +160,13 @@ export class StoreCatalogComponent implements OnInit {
       this.cartList.push(cartItem);
     }
 
-    this.catalogListFiltered.find(item => item.id == cartItem.id).quantity = cartItem.id 
+    this.catalogListFiltered.find((item) => item.id == cartItem.catalogId).quantity =
+      cartItem.quantity;
 
     return;
   }
 
-  removeItemFromCart(cartItem): void {
+  removeItemFromCart(cartItem: CartItemModel): void {
     this.cartList.splice(this.cartList.findIndex((item) => item.catalogId == cartItem.catalogId));
     return;
   }
@@ -200,6 +211,6 @@ export class StoreCatalogComponent implements OnInit {
   }
 
   getCatalogListFilteredByCategory(category: string): CatalogItemModel[] {
-    return this.catalogListFiltered.filter(item => item.category == category);
+    return this.catalogListFiltered.filter((item) => item.category == category);
   }
 }
