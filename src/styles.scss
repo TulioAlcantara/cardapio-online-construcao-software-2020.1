@@ -1,9 +1,18 @@
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {
+  font-family: "Montserrat", sans-serif ;
+
+  h1,h2,h3,h4,h5{
+    font-family: "Montserrat", sans-serif !important;
+  }
+}
+
 
 body {
   height: 100%;
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 
   .navbar {
     .nav-icon-cart {
@@ -24,7 +33,7 @@ body {
   }
 
   // DEFAULT CLASSES
-  mat-icon{
+  mat-icon {
     vertical-align: middle;
     // margin-right: 0.5rem;
   }

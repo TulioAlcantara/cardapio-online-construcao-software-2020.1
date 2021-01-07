@@ -71,7 +71,7 @@ export class StoreCatalogComponent implements OnInit {
       this.store = StoreModel.fromFirestoreSnapshot(storeSnapshot);
       this.storeLoading = false;
       this._storage.ref(this.store.logo).getDownloadURL().subscribe(url =>{
-        this.store.logo = url
+        this.store.logoUrl = url
       })
     });
     
@@ -90,7 +90,7 @@ export class StoreCatalogComponent implements OnInit {
               .ref(catalogItem.picture)
               .getDownloadURL()
               .subscribe((url) => {
-                catalogItem.picture = url;
+                catalogItem.pictureUrl = url;
               });
             this.catalogList.push(catalogItem);
           });

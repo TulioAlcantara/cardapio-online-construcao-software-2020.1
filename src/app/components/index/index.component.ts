@@ -24,7 +24,7 @@ export class IndexComponent implements OnInit {
         storeListSnapshot.forEach((storeSnapshot) => {
           let store = StoreModel.fromFirestoreSnapshot(storeSnapshot);
           this._storage.ref(store.logo).getDownloadURL().subscribe(url =>{
-            store.logo = url;
+            store.logoUrl = url;
           })
           this.storeList.push(store);
         });

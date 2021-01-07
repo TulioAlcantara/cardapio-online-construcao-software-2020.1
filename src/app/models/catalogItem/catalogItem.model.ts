@@ -1,15 +1,16 @@
-import {AngularFireStorage} from "@angular/fire/storage";
+import { AngularFireStorage } from "@angular/fire/storage";
 
 export class CatalogItemModel {
-  name: string
-  description: string
-  picture: string
-  id: string
-  value: number
-  category: string
-  quantity: number = 0
-  
-  static fromFirestoreSnapshot(snapshot){
+  name: string;
+  description: string;
+  picture: string;
+  pictureUrl: string;
+  id: string;
+  value: number;
+  category: string;
+  quantity: number = 0;
+
+  static fromFirestoreSnapshot(snapshot) {
     const catalogItem = new CatalogItemModel();
     catalogItem.name = snapshot.get("name");
     catalogItem.description = snapshot.get("description");
@@ -21,7 +22,5 @@ export class CatalogItemModel {
     return catalogItem;
   }
 
-  static getPictureUrl(picturePath: string){
-    
-  }
+  static getPictureUrl(picturePath: string) {}
 }

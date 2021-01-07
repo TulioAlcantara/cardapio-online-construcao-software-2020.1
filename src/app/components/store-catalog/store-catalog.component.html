@@ -1,7 +1,7 @@
 <mat-spinner color="accent" *ngIf="storeLoading || catalogListLoading"></mat-spinner>
 <div class="store-info-container" *ngIf="!storeLoading && !catalogListLoading">
   <div class="store-logo">
-    <img src="{{ store.logo }}" />
+    <img src="{{ store.logoUrl }}" />
   </div>
   <div class="store-info">
     <h1 class="store-title">{{ store.name }}</h1>
@@ -29,7 +29,7 @@
     <div *ngFor="let catalogItem of getCatalogListFilteredByCategory(catalogCategory)">
       <mat-card>
         <mat-card-content class="catalog-item">
-          <img class="catalog-item-picture" src="{{ catalogItem.picture }}" />
+          <img class="catalog-item-picture" src="{{ catalogItem.pictureUrl }}" />
 
           <div class="catalog-item-info">
             <h3 class="catalog-item-title">{{ catalogItem.name }}</h3>
