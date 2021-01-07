@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { CartItemModel } from "../../models/cartItem/cartItem.model";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
 @Component({
   selector: "app-checkout-modal",
@@ -11,15 +12,13 @@ export class CheckoutModalComponent implements OnInit {
   cartTotalValue: number = 0;
   cartList: Array<CartItemModel>;
   whatsAppLink: string;
+  whatsAppIcon = faWhatsapp;
 
   constructor(@Inject(MAT_DIALOG_DATA) data) {
     this.cartList = data.cartList;
     this.whatsAppLink = data.whatsAppLink;
-    this.cartTotalValue = data.cartTotalValue
+    this.cartTotalValue = data.cartTotalValue;
   }
 
-  ngOnInit(): void {
-    
-  }
-
+  ngOnInit(): void {}
 }

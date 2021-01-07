@@ -22,6 +22,9 @@ import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
+//FONT AWESOME
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 //FIREBASE
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
@@ -51,6 +54,9 @@ import { IndexComponent } from './components/index/index.component';
     MatTableModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
+
+    //FONT AWESOME
+    FontAwesomeModule,
 
     //ANGULAR
     AngularFireModule.initializeApp(environment.firebaseConfig),

@@ -1,10 +1,15 @@
 .navbar {
-.nav-icon-cart{
-  margin-right: 0.5rem;
-}
+  .nav-icon-cart {
+    margin-right: 0.5rem;
+  }
 
   .navbar-title {
     text-decoration: none;
+    color: white;
+  }
+
+  .github-link{
+    margin-left: auto;
     color: white;
   }
 }

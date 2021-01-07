@@ -140,7 +140,7 @@ export class StoreCatalogComponent implements OnInit {
       catalogId: catalogItem.id,
       value: catalogItem.value,
       quantity: 0,
-      picture: catalogItem.picture,
+      pictureUrl: catalogItem.pictureUrl,
     };
     return newCartItem;
   }
