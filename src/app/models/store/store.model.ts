@@ -7,7 +7,8 @@ export class StoreModel{
     adress: string;
     catalogList: Array<CatalogItemModel>;
     phone: number; 
-    //TODO: Adicionar categoria
+    logo: string;
+    category: string;
 
     static fromFirestoreSnapshot(snapshot){
         const store = new StoreModel();
@@ -16,6 +17,8 @@ export class StoreModel{
         store.adress = snapshot.get('adress');
         store.phone = snapshot.get('phone');
         store.id = snapshot.id;
+        store.logo = snapshot.get('logo');
+        store.category = snapshot.get('category');
 
         return store;
       }

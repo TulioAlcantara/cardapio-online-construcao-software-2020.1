@@ -1,3 +1,5 @@
+import {AngularFireStorage} from "@angular/fire/storage";
+
 export class CatalogItemModel {
   name: string
   description: string
@@ -17,5 +19,9 @@ export class CatalogItemModel {
     catalogItem.category = snapshot.get("category");
 
     return catalogItem;
+  }
+
+  static getPictureUrl(picturePath: string){
+    
   }
 }

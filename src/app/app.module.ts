@@ -27,9 +27,10 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { environment } from "../environments/environment";
+import { IndexComponent } from './components/index/index.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, StoreCatalogComponent, CheckoutModalComponent],
+  declarations: [AppComponent, LoginComponent, StoreCatalogComponent, CheckoutModalComponent, IndexComponent],
   imports: [
     //ANGULAR
     BrowserModule,

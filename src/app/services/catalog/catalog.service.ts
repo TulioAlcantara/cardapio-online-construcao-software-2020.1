@@ -11,18 +11,5 @@ export class CatalogService {
 
   getCatalogItensOfStore(storeId) {
     return this.firestore.collection("stores").doc(storeId).collection("catalogList").get();
-    // .subscribe((snapshots) => {
-    //   if (snapshots.docs.length > 0) {
-    //     resolve(
-    //       snapshots.docs.map((snapshot) =>
-    //         CatalogItemModel.fromFirestoreSnapshot(snapshot)
-    //       )
-    //     );
-    //   }
-    //   resolve([]);
   }
-
-  // getStore (storeId) {
-  //   return this.firestore.collection("stores").doc(storeId).get();
-  // }
 }

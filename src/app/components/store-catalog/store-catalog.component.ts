@@ -13,6 +13,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 //SERVICES
 import { CatalogService } from "src/app/services/catalog/catalog.service";
 import { StoreService } from "src/app/services/store/store.service";
+import { AngularFireStorage } from "@angular/fire/storage";
 
 //MODELS
 import { StoreModel } from "src/app/models/store/store.model";
@@ -52,7 +53,8 @@ export class StoreCatalogComponent implements OnInit {
     public dialog: MatDialog,
     private _catalogService: CatalogService,
     private _storeService: StoreService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
@@ -68,7 +70,11 @@ export class StoreCatalogComponent implements OnInit {
     this._storeService.getStore(this.selectedStoreId).subscribe((storeSnapshot) => {
       this.store = StoreModel.fromFirestoreSnapshot(storeSnapshot);
       this.storeLoading = false;
+      this._storage.ref(this.store.logo).getDownloadURL().subscribe(url =>{
+        this.store.logo = url
+      })
     });
+    
   }
 
   getCatalogItensOfStore(): void {
@@ -77,7 +83,16 @@ export class StoreCatalogComponent implements OnInit {
       .subscribe((catalogListSnapshot) => {
         if (!catalogListSnapshot.empty) {
           catalogListSnapshot.forEach((catalogItemSnapshot) => {
-            this.catalogList.push(CatalogItemModel.fromFirestoreSnapshot(catalogItemSnapshot));
+            let catalogItem: CatalogItemModel = CatalogItemModel.fromFirestoreSnapshot(
+              catalogItemSnapshot
+            );
+            this._storage
+              .ref(catalogItem.picture)
+              .getDownloadURL()
+              .subscribe((url) => {
+                catalogItem.picture = url;
+              });
+            this.catalogList.push(catalogItem);
           });
           this.catalogListLoading = false;
           this.catalogListFiltered = this.catalogList;

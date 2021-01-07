@@ -1,0 +1,18 @@
+<div class="index-container">
+  <div class="store-list">
+    <div *ngFor="let store of storeList">
+      <a href="/{{store.id}}" class="store-link">
+        <mat-card class="store-card">
+          <div class="store-logo">
+            <img src="{{ store.logo }}" />
+          </div>
+
+          <div class="store-info">
+            <h5 class="store-name">{{ store.name }}</h5>
+            <p class="store-description">{{ store.category }}</p>
+          </div>
+        </mat-card>
+      </a>
+    </div>
+  </div>
+</div>

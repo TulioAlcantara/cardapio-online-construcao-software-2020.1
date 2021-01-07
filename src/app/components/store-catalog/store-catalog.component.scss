@@ -1,3 +1,7 @@
+mat-spinner{
+  margin: auto auto;
+}
+
 .store-info-container {
   display: grid;
   grid-template-columns: 1fr 5fr;
@@ -28,7 +32,6 @@
     img {
       width: auto;
       height: 100%;
-      margin-left: -50px;
     }
   }
 
@@ -65,6 +68,7 @@
 
       .catalog-item-picture {
         width: 100%;
+        height: 200px;
       }
 
       .catalog-item-info {
@@ -86,7 +90,6 @@
 
 .btn-checkout {
   margin: 2rem 0;
-  background-color: black;
-  color: white;
+  color: black;
   width: 100%;
 }

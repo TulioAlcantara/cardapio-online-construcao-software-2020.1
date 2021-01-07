@@ -1,0 +1,25 @@
+.store-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+
+  .store-link {
+    text-decoration: none;
+
+    .store-card {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 1rem;
+      .store-logo img {
+        width: 100%;
+        height: 100px;
+      }
+
+      .store-info{
+          .store-name{
+              margin-bottom: 0;
+          }
+      }
+    }
+  }
+}

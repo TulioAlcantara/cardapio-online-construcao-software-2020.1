@@ -1,13 +1,11 @@
-<mat-spinner *ngIf="storeLoading || catalogListLoading"></mat-spinner>
+<mat-spinner color="accent" *ngIf="storeLoading || catalogListLoading"></mat-spinner>
 <div class="store-info-container" *ngIf="!storeLoading && !catalogListLoading">
   <div class="store-logo">
-    <img
-      src="data:image/png;base64,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"
-    />
+    <img src="{{ store.logo }}" />
   </div>
   <div class="store-info">
     <h1 class="store-title">{{ store.name }}</h1>
-    <h3>Lanches</h3>
+    <h3>{{ store.category }}</h3>
     <p class="store-description">{{ store.description }}</p>
     <p class="store-adress">
       <mat-icon class="store-adress-icon">location_on</mat-icon>{{ store.adress }}
@@ -18,7 +16,7 @@
 
 <div class="catalog-filter" *ngIf="!storeLoading && !catalogListLoading">
   <form>
-    <mat-form-field class="w-100"> 
+    <mat-form-field class="w-100">
       <mat-label><mat-icon>search</mat-icon>Buscar</mat-label>
       <input matInput type="text" [formControl]="catalogListFilterControl" />
     </mat-form-field>
@@ -28,14 +26,14 @@
 <div class="catalog-category" *ngFor="let catalogCategory of catalogListCategoriesFiltered">
   <h2 class="catalog-category-title">{{ catalogCategory }}</h2>
   <div class="catalog-item-list">
-    <div *ngFor="let catalogItem of getCatalogListFilteredByCategory(catalogCategory)" class="teste">
+    <div *ngFor="let catalogItem of getCatalogListFilteredByCategory(catalogCategory)">
       <mat-card>
         <mat-card-content class="catalog-item">
           <img class="catalog-item-picture" src="{{ catalogItem.picture }}" />
 
           <div class="catalog-item-info">
             <h3 class="catalog-item-title">{{ catalogItem.name }}</h3>
-            <h3 class="catalog-item-value">${{ catalogItem.value.toFixed(2) }}</h3>
+            <h3 class="catalog-item-value">${{ catalogItem.value ? catalogItem.value.toFixed(2): 0 }}</h3>
             <small class="catalog-item-desc">
               {{ catalogItem.description }}
             </small>
@@ -50,7 +48,7 @@
                   class="catalog-item-quantity-input"
                   type="number"
                   (change)="handleQuantityChanges($event, catalogItem.id)"
-                  value="{{catalogItem.quantity}}"
+                  value="{{ catalogItem.quantity }}"
                   min="0"
                 />
               </mat-form-field>
@@ -62,7 +60,13 @@
   </div>
 </div>
 
-<button class="btn-checkout" mat-raised-button (click)="openCheckoutModal()" *ngIf="!cartIsEmpty">
+<button
+  class="btn-checkout"
+  mat-raised-button
+  color="accent"
+  (click)="openCheckoutModal()"
+  *ngIf="!cartIsEmpty"
+>
   <mat-icon>shopping_cart</mat-icon> Checkout<span id="checkout-total-value">{{
     checkoutValueOutput
   }}</span>
