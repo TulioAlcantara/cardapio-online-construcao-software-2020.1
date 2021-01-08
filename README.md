@@ -1,27 +1,22 @@
-# OnlineCatalog
+# Cardápio Online
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
+Sistema que permite aos restaurantes disponibilizarem de maneira simples e fácil seu cardápio online e receber pedidos via WhatsApp. 
 
-## Development server
+# Stack
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* **Angular 9** - Front-End
+    * **Material** - Estilo
+    * **Karma** - Teste Unitário
+* **Firebase** - Back-End
+    * **Firestore** - Banco de Dados
+    * **Firebase Storage** - Banco de Arquivos
+    * **Firebase Hosting** - Hospedagem
+* **GitHub Actions** - CI/CD
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Passo-a-passo para excução
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* Instale o [Node](https://nodejs.org/en/) em sua maquina;
+* Execute o comando `npm install` dentro da pasta raiz do projeto para instalar as dependências;
+* Execute o comando `ng serve` para construir o projeto e hospedar ele localmente na URL `http://localhost:4200/` (Todas as mudanças no código serão recarregadas autómaticamente nessa URL);
+* Execute o comando  `ng test` para executar os testes unitários via [Karma](https://karma-runner.github.io).
