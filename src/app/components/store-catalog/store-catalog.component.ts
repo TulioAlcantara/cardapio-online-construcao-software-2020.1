@@ -53,12 +53,12 @@ export class StoreCatalogComponent implements OnInit {
     public dialog: MatDialog,
     private _catalogService: CatalogService,
     private _storeService: StoreService,
-    private route: ActivatedRoute,
+    private _route: ActivatedRoute,
     private _storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((param) => {
+    this._route.paramMap.subscribe((param) => {
       this.selectedStoreId = param.get("id");
       this.getStoreInfo();
       this.getCatalogItensOfStore();

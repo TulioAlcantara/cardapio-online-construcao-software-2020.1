@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { AngularFireStorage } from "@angular/fire/storage";
-import { StoreModel } from "src/app/models/store/store.model";
+
+//SERVICES
 import { StoreService } from "src/app/services/store/store.service";
+import { AngularFireStorage } from "@angular/fire/storage";
+
+//MODELS
+import { StoreModel } from "src/app/models/store/store.model";
 
 @Component({
   selector: "app-index",
@@ -28,7 +32,6 @@ export class IndexComponent implements OnInit {
           })
           this.storeList.push(store);
         });
-        console.log(this.storeList)
       }
     });
   }

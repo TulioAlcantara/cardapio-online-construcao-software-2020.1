@@ -7,9 +7,9 @@ import { StoreModel } from "../../models/store/store.model";
   providedIn: "root",
 })
 export class CatalogService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private _firestore: AngularFirestore) {}
 
   getCatalogItensOfStore(storeId) {
-    return this.firestore.collection("stores").doc(storeId).collection("catalogList").get();
+    return this._firestore.collection("stores").doc(storeId).collection("catalogList").get();
   }
 }

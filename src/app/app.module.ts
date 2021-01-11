@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CheckoutModalComponent } from "./components/checkout-modal/checkout-modal.component";
 
 //MATERIAL
-import { MatDialogModule } from "@angular/material/dialog";
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatTableModule } from "@angular/material/table";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -23,17 +23,23 @@ import { MatInputModule } from "@angular/material/input";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 //FONT AWESOME
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 //FIREBASE
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { environment } from "../environments/environment";
-import { IndexComponent } from './components/index/index.component';
+import { IndexComponent } from "./components/index/index.component";
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, StoreCatalogComponent, CheckoutModalComponent, IndexComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    StoreCatalogComponent,
+    CheckoutModalComponent,
+    IndexComponent,
+  ],
   imports: [
     //ANGULAR
     BrowserModule,
@@ -63,7 +69,8 @@ import { IndexComponent } from './components/index/index.component';
     AngularFirestoreModule,
     // AngularFireStorageModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

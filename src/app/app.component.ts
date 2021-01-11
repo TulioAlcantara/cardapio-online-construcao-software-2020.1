@@ -8,6 +8,6 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'online-catalog';
+  title = 'Cardápio Online';
   githubIcon = faGithub
 }

@@ -1,16 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { IndexComponent } from "./index.component";
 
-import { IndexComponent } from './index.component';
+//FIREBASE
+import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFireStorage } from "@angular/fire/storage";
 
-describe('IndexComponent', () => {
+describe("IndexComponent", () => {
   let component: IndexComponent;
   let fixture: ComponentFixture<IndexComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IndexComponent ]
-    })
-    .compileComponents();
+      declarations: [IndexComponent],
+      providers: [
+        { provide: AngularFirestore, useValue: {} },
+        { provide: AngularFireStorage, useValue: {} },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +25,7 @@ describe('IndexComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
