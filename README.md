@@ -17,7 +17,7 @@ Sistema que permite aos restaurantes disponibilizarem de maneira simples e fáci
 
 ![alt text](https://github.com/TulioAlcantara/cardapio-online-construcao-software-2020.1/blob/main/documentation/Architeture.jpeg?raw=True)
 
-O sistema utiliza dos componentes do Angular como "View" e "Controller", que são responsáveis por escutar as requisições do cliente e renderezirar a página resultado. Os componentes acionam os serviços para buscar os dados que serão usados na construção da página, esses serviços são responsáveis pela comunicação com o Banco de Dados e Banco de Arquivos, ambos hospedados no Firebase. Uma vez que os dados do Firebase são obtidos, os mesmos são retornados como JSON e transformados em objetos TypeScript definidos nos Modelos.
+O sistema utiliza dos componentes do Angular como "View" e "Controller", que são responsáveis por escutar as requisições do cliente ,renderezirar a página resultado e processar os eventos acionados pelo usuário. Os componentes acionam os serviços para buscar os dados que serão usados na construção da página. Esses serviços são responsáveis pela comunicação com o Banco de Dados e Banco de Arquivos, ambos hospedados no Firebase. Uma vez que os dados do Firebase são obtidos, os mesmos são retornados como JSON e transformados em objetos TypeScript definidos nos Modelos.
 
 # Passo-a-passo para excução
 
