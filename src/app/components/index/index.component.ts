@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 
 //SERVICES
 import { StoreService } from "src/app/services/store/store.service";
@@ -12,13 +12,17 @@ import { StoreModel } from "src/app/models/store/store.model";
   templateUrl: "./index.component.html",
   styleUrls: ["./index.component.scss"],
 })
-export class IndexComponent implements OnInit {
+export class IndexComponent implements OnInit, AfterViewInit {
   //STORES
   storeList = Array<StoreModel>();
 
   constructor(private _storeService: StoreService, private _storage: AngularFireStorage) {}
 
   ngOnInit(): void {
+
+  }
+
+  ngAfterViewInit() :void {
     this.loadStores();
   }
 
